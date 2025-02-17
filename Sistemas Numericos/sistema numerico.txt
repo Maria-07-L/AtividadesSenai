@@ -1,0 +1,3 @@
+Bom agente aprendeu os sistemas: decimal, binario e hexadecimal. 
+aprendemos a converter binario para decimal, e decimal para binario e hexadecimal para para decimal.
+ps: perdi as folhas.
