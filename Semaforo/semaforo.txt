@@ -1,0 +1,57 @@
+/*
+Nome do projeto: Semaforo
+Autor: Maria Eduarda Silva Lomeu
+Data:20/02/2025
+*/
+
+#define pinLedVermelho 13
+#define pinLedVerde    11
+#define pinLedAmarelo  12
+#define pinLedVermelhoB 10
+#define pinLedVerdeB    9  
+#define pinLedAmareloB  8
+#define tempoLigadoVermelho 5000
+#define tempoDesligado 2000
+#define tempoLigadoVerde 3000
+#define tempoDesligado 2000
+#define tempoLigadoAmarelo  2000
+#define tempoDesligado 1000
+#define tempoLigadoVermelhoB 5000
+#define tempoDesligadoB 2000
+#define tempoLigadoVerdeB 3000
+#define tempoDesligadoB 2000
+#define tempoLigadoAmareloB  2000
+#define tempoDesligadoB 1000
+
+void setup()
+{
+  pinMode(pinLedVerde, OUTPUT);
+  pinMode(pinLedAmarelo, OUTPUT);
+   pinMode(pinLedVermelho, OUTPUT);
+  pinMode(pinLedVerdeB, OUTPUT);
+  pinMode(pinLedAmareloB, OUTPUT);
+  pinMode(pinLedVermelhoB, OUTPUT);
+}   //fIM
+void loop()
+{
+  digitalWrite(pinLedVermelhoB, HIGH);
+  digitalWrite(pinLedVerde, HIGH);
+  delay(tempoLigadoVerde);
+  digitalWrite(pinLedVerde, LOW);
+  
+  digitalWrite(pinLedAmarelo, HIGH);
+  delay(tempoLigadoAmarelo);
+  digitalWrite(pinLedAmarelo, LOW);
+  digitalWrite(pinLedVermelhoB, LOW);
+ 
+  digitalWrite(pinLedVermelho, HIGH);
+  digitalWrite(pinLedVerdeB,HIGH);
+  delay(tempoLigadoVerdeB);
+  digitalWrite(pinLedVerdeB, LOW);
+  
+  digitalWrite(pinLedAmareloB,HIGH);
+  delay(tempoLigadoAmareloB);
+  digitalWrite(pinLedAmareloB, LOW);
+  digitalWrite(pinLedVermelho, LOW);
+}
+
