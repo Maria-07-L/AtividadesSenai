@@ -1,0 +1,59 @@
+/*
+Nome do projeto: Matematica
+Autor: Maria Eduarda Silva Lomeu
+Data:24/02/2025
+*/
+
+int numeroA = 10;
+int numeroB = 3;
+int resultado = 0;
+
+
+void setup ()
+{
+  //atividade 1
+  Serial.begin (9600);
+  resultado = map(600, 0, 1023, 0, 100);
+  Serial.print("Resultado do remapeamento eh:");
+  Serial.println(resultado);
+ 
+  //atividade 2
+  int valor = 0;
+  Serial.print("Decremento de 0 a 10:");
+  Serial.println(++valor);
+  Serial.println(++valor);
+  Serial.println(++valor);
+  Serial.println(++valor);
+  Serial.println(++valor);
+  Serial.println(++valor);
+  Serial.println(++valor);
+  Serial.println(++valor);
+  Serial.println(++valor);
+  Serial.println(++valor);
+  Serial.println(--valor);
+  Serial.println(--valor);
+  Serial.println(--valor);
+  Serial.println(--valor);
+  Serial.println(--valor);
+  Serial.println(--valor);
+  Serial.println(--valor);
+  Serial.println(--valor);
+  Serial.println(--valor);
+  Serial.println(--valor);
+  
+  //Atividade 3
+  int valor1 = 6;
+  int valor2 = 2 ; 
+  float resultado1 = 0;  
+
+  resultado1 = (valor1 + valor2) /2.0;
+  Serial.println ("Media aritimedica eh: ") ;
+  Serial.print (resultado1);  
+  
+  
+  
+}
+void loop ()
+{
+  
+}
