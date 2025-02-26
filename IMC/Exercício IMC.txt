@@ -1,0 +1,41 @@
+/*Nome do projeto: Imc
+Autor:Maria Eduarda Silva Lomeu 
+Data:26/02/2025
+*/
+
+void setup()
+{
+  Serial.begin(9600);
+ 
+  float peso= 60;
+  float altura= 1.75;
+  float resultado= 0;  
+  float imc= peso / sq(altura);
+
+resultado = peso / sq (altura);
+Serial.print("Meu IMC:");
+Serial.println(resultado); 
+  
+
+ 
+  if(imc > 18.5){
+    Serial.println("abaixo do peso");
+  }else if (imc <= 18.5 && peso > 24.9){
+  Serial.println("peso ideal");
+  }
+  
+  if(imc <= 25.0 && peso >29.9){
+  Serial.println("peso alterado");
+  }else{
+  Serial.println("peso bem alterado");
+  
+}
+  
+  
+  
+  
+}
+void loop()
+{
+  
+}
