@@ -1,0 +1,267 @@
+/*Nome do projeto:Estruturas 
+Autor:Maria Eduarda Silva Lomeu
+Data:27/02/2025
+*/
+#define pinLedVerde 13
+#define tempoLigado 2000
+#define tempoDesligado 1000
+
+void setup ()
+{ Serial.begin(9600);
+  //atividade1 
+ 
+  int temperatura = 30;
+ if (temperatura >=30){
+ }else if(temperatura <=30 && temperatura >= 50){
+
+ }
+  
+  pinMode(pinLedVerde, OUTPUT);
+ 
+ digitalWrite(pinLedVerde, HIGH);
+ delay(tempoLigado);
+ digitalWrite(pinLedVerde, LOW);
+ 
+ 
+ 
+ 
+ 
+  
+}
+
+void loop ()
+{
+ 
+  
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//atividade2
+#define pinLedVermelho 13
+
+
+
+void setup ()
+ { 
+  pinMode(pinLedVermelho, OUTPUT);
+  Serial.begin(9600);
+  
+ int bateriaBaixa = 20;
+ if (bateriaBaixa >=20){
+  digitalWrite(pinLedVermelho, HIGH);
+ }else if(bateriaBaixa <=20 && bateriaBaixa>= 15){
+  digitalWrite(pinLedVermelho,LOW);
+ 
+ }
+ }
+  
+  void loop ()
+  {
+   
+
+   
+  }
+    
+ 
+ 
+ 
+
+//Atividade3
+
+#define pinLedAzul 13
+int numero2=17;
+int resultado = 0;
+#define tempo
+
+
+void setup ()
+{Serial.begin(9600);
+pinMode(pinLedAzul, OUTPUT);
+}
+
+void loop ()
+{
+resultado = numero2 % 2;
+ if (resultado == 0){
+   digitalWrite(pinLedAzul, HIGH);
+ }
+}
+
+
+
+
+
+
+
+
+//atividade 4
+
+int numero= -2;
+  
+
+void setup ()
+{Serial.begin(9600);
+  if (numero >0){
+  Serial.println(" o numero eh positivo");
+  }else if(numero <0){
+ Serial.println("o numero eh negativo");
+  }
+}
+
+void loop ()
+{
+
+}
+
+
+
+
+
+
+
+int valor= 10;
+int resultado=0;
+
+void setup ()
+{Serial.begin(9600);
+  if(valor <1000){
+  resultado= valor * 10 / 100 + valor;  
+  Serial.println("nome:gulhermino, Cargo:catator de lixo, Antigo salario:10"); 
+  Serial.println("novo salario ");
+  Serial.println(resultado);
+    
+}
+
+}
+
+void loop ()
+{
+}
+
+
+
+
+
+
+
+int valor= 10;
+int resultado=0;
+
+void setup ()
+{Serial.begin(9600);
+  if(valor <1000){
+  resultado= valor * 10 / 100 + valor;  
+  Serial.println("nome:gulhermino, Cargo:catator de lixo, Antigo salario:10"); 
+  Serial.println("novo salario ");
+  Serial.println(resultado);
+    
+}
+
+}
+
+void loop ()
+{
+}
+
+
+
+
+
+
+
+
+//atividade6
+int salario= 120;
+int resultado= 0 ;
+
+void setup()
+{Serial.begin(9600);
+ resultado= salario * 30 / 100 + salario; 
+if (salario <= 500){
+ Serial.println("reajuste de salario");
+ Serial.println(resultado);
+ }else if (salario > 500){
+ Serial.println("Nao possui direito ao reajuste");
+ }
+
+}
+
+void loop ()
+{
+}
+  
+
+
+
+
+
+
+
+
+//Atividade7
+int numeroA = 24;
+int numeroB = 64;  
+
+void setup ()
+  
+{ 
+  Serial.begin(9600);
+ 
+  if (numeroB > numeroA){
+  Serial.println("numeroB eh maior:");
+}else if(numeroA > numeroB ){
+  Serial.println("numeroA eh maior: ");
+
+}
+  
+
+}
+
+void loop()
+{
+
+}  
+
+
+
+
+
+
+
+
+
+//atividade8
+int nota= 6;
+int nota1= 3;
+int nota2= 10;
+int nota3= 1;
+int media= 0;  
+
+void setup()
+{Serial.begin(9600);
+media = (nota + nota1 + nota2 + nota3)/4;
+ if(media <= 7){
+ Serial.println("aprovado");
+   
+ }else if(media >=5){
+   Serial.println("reprovado");
+ 
+ }
+}
+
+void loop ()
+{
+}
