@@ -1,0 +1,63 @@
+/*Nome do projeto:Analise do Ar
+  Autor:Maria Eduarda Silva Lomeu
+  Data:06/03/2025
+*/
+
+#define pinLedVermelho 13
+#define pinLedAmarelo 12
+#define pinLedVerde 11
+#define pinLedAzul 10
+#define pinLedBranco 9
+
+void setup()
+{
+pinMode(pinLedVermelho,OUTPUT);
+pinMode(pinLedAmarelo,OUTPUT);
+pinMode(pinLedVerde,OUTPUT);
+pinMode(pinLedAzul,OUTPUT);
+pinMode(pinLedBranco,OUTPUT);  
+  
+int valor = 1;
+
+switch(valor)
+{
+ case 0:
+ digitalWrite(pinLedVermelho,HIGH);
+ Serial.println("Qualidade do ar péssimo");
+ break;
+  
+ case 1:
+ digitalWrite(pinLedAmarelo,HIGH);
+ Serial.println("Qualidade do ar ruim");
+ break;
+
+ case 2:
+ digitalWrite(pinLedVerde,HIGH);
+ Serial.println("Qualidade do ar normal");
+ break;
+  
+ case 3:
+ digitalWrite(pinLedAzul,HIGH);
+ Serial.println("Qualidade do ar boa");
+ break;
+  
+ case 4:
+ digitalWrite(pinLedBranco,HIGH);
+ Serial.println("Qualidade do ar exelente"); 
+ break;
+  
+ default:
+ Serial.println("erro");
+ break;  
+  
+ 
+    
+}
+
+
+}
+
+void loop()
+{
+
+}
