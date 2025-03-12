@@ -1,0 +1,101 @@
+Pisca Led com Delay
+
+/**/
+
+#define pinBotao 13
+#define pinLed 2
+#define tempoLigado 2000
+#define tempoDesligado 1000
+
+void setup()
+{
+ Serial.begin(9600);
+ pinMode(pinLed, OUTPUT);
+ pinMode(pinBotao, INPUT); 
+}
+
+void loop()
+  //Read = Ler
+  //Write = Escrever
+  
+{
+ bool estadoBotao = digitalRead (pinBotao);
+ Serial.println(estadoBotao); 
+ 
+  if (estadoBotao == 1){ 
+ digitalWrite(pinLed, HIGH);
+ delay(2000);
+ digitalWrite(pinLed, LOW);
+ delay(1000);   
+  }
+}
+
+
+
+Acendendo Led com Botão
+
+/**/
+
+#define pinBotao 13
+#define pinLed 2
+void setup()
+{
+ Serial.begin(9600);
+ pinMode(pinLed, OUTPUT);
+ pinMode(pinBotao, INPUT); 
+}
+
+void loop()
+  //Read = Ler
+  //Write = Escrever
+  
+{ bool estadoBotao = digitalRead (pinBotao);
+ Serial.println(estadoBotao); 
+ 
+  if (estadoBotao == 1){
+   digitalWrite(pinLed, HIGH);
+  }
+  if (estadoBotao == 0){
+    digitalWrite(pinLed,LOW);}
+ 
+  }
+
+
+
+Pisca led sem delay
+
+/*Nome do projeto:
+Autor:Maria Eduarda Silva Lomeu
+Data:11/03/2025
+*/
+
+#define pinBotao 13
+#define pinLed 2
+#define tempoLigado 2000
+unsigned long tempoInicial = 0;
+bool estadoLed = 0;
+
+
+void setup()
+{
+ Serial.begin(9600);
+ pinMode(pinLed, OUTPUT);
+ pinMode(pinBotao, INPUT); 
+}
+
+void loop()
+  //Read = Ler
+  //Write = Escrever
+  
+{ 
+
+  bool estadoBotao = digitalRead (pinBotao);
+ Serial.println(estadoBotao);
+  
+ unsigned long tempoAtual = millis();
+  if (tempoAtual - tempoInicial >=1000){
+  estadoLed = !estadoLed;
+  digitalWrite(pinLed, estadoLed);
+  tempoInicial = tempoAtual;
+  }
+ }
