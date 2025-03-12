@@ -1,0 +1,39 @@
+/*Nome do projeto:Exercicio
+Autor:Maria Eduarda Silva Lomeu
+Data:12/03/2025
+*/
+
+#define pinBotao 13
+#define pinLed 2
+#define tempoLigado 1000
+unsigned long tempoInicial = 0;
+bool estadoLed = 0;
+int estadoAnteriorBotao =0;
+
+void setup()
+{
+ Serial.begin(9600);
+ pinMode(pinLed, OUTPUT);
+ pinMode(pinBotao, INPUT); 
+}
+
+void loop()
+  //Read = Ler
+  //Write = Escrever
+  
+{ 
+  bool estadoBotao = digitalRead (pinBotao);
+  Serial.println(estadoBotao);
+  
+  if(estadoBotao==1 && estadoAnteriorBotao ==0){
+  estadoLed = !estadoLed;
+  digitalWrite(pinLed, estadoLed);
+    
+  
+  }
+ 
+  
+  
+  
+  estadoAnteriorBotao = estadoBotao; 
+ }
