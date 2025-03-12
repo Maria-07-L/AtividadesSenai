@@ -99,3 +99,39 @@ void loop()
   tempoInicial = tempoAtual;
   }
  }
+
+
+
+
+contagem do botão 
+
+
+
+/*Nome do projeto: Contagem do Botao
+Autor:Maria Eduarda Silva Lomeu
+Data:11/03/2025
+*/
+
+#define  pinBotao 13
+bool estadoAtualBotao= digitalRead(pinBotao);//Le o estado atual do botao
+int estadoAnteriorBotao=0;
+int contagem=0;
+
+  
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(pinBotao, INPUT);
+  
+}
+
+void loop()
+{bool estadoAtualBotao = digitalRead (pinBotao);
+  if(estadoAtualBotao==1 && estadoAnteriorBotao ==0){
+  contagem++;
+  Serial.println(contagem);  
+  
+  }
+    
+  estadoAnteriorBotao = estadoAtualBotao; //Guarda o estado atual em uma variavel 
+}
