@@ -1,0 +1,44 @@
+#include <Arduino.h> //bibliteca para incluir o arduino no programa
+
+const int pinBotao = 3; // Declara o pino do botao // const int: é uma constante inteira que não pode ser alterada.
+
+// PROTOTIPOS DAS FUNCOES //os protipos sao tipo definicoes
+void ligaLed(int); // funcao void: e uma divisoria para nao se perder no programa
+void desligaLed(int);
+void piscaLed(int, unsigned long);
+int somaDoisNumeros(int, int); // int variavel que guarda numeros inteiros
+
+void setup()
+{
+  pinMode(2, OUTPUT); //(pino, saida do led)
+  Serial.begin(9600); // comunicacao entre o serial e o computador //Serial: comunicacao entre a placa arduino
+}
+void loop()
+{
+  piscaLed(2, 100);                              // pisca o led (pino, tempo);
+  int resultadoDaSoma = somaDeDoisNumeros(4, 8); // soma de dois numeros para apos receber o resultado
+  Serial.println(resultadoDaSoma);               // para apos receber o resultado no Serial.print
+}
+
+void ligaLed(int pin) // funcao liga led
+{
+  digitalWrite(pin, HIGH); // Liga o led
+}
+
+void desligaLed(int pin) // funcao desliga led
+{
+  digitalWrite(pin, LOW); // Desliga o led
+}
+
+void piscaLed(int pin, unsigned long tempo) // pisca o led com a variavel unsigned long
+{
+  ligaLed(pin);
+  delay(tempo);
+  desligaLed(pin);
+  delay(tempo);
+}
+int somaDeDoisNumeros(int numeroA, int numeroB) // a soma entre o numeroA + o numeroB
+{
+  int resultado = numeroA + numeroB;
+  return resultado; // toda funcao que nao for void e for int tem que ter return, para ter um retorno do resultado final.
+}
