@@ -1,0 +1,50 @@
+#include <Arduino.h>
+
+//Protipos
+float pitaguras(float,float);
+float temperatura(float);                          
+float milimetrosParaPolegadas(float);
+float polegadasParaCentimetros(float);
+float tamanhoDaTv(float,float);
+
+void setup()
+{
+  Serial.begin(9600);
+ Serial.println(pitaguras(3 , 4)); 
+ Serial.println(temperatura(100));
+ Serial.printf("100mm é igual a %f pol\n\r", milimetrosParaPolegadas(100));
+ Serial.printf("Uma Tv de 50\" tem %f centimetros na diagonal\n\r", polegadasParaCentimetros(50));
+ Serial.printf("Uma Tv de 50\" e 72cm de altura tem %fcm de comprimento", tamanhoDaTv(50,72));
+}
+
+void loop()
+{
+}
+
+float pitaguras(float catetoA, float catetoB)
+{
+float resultado = (catetoA * catetoA)+(catetoB * catetoB);
+resultado = sqrt (resultado);
+return resultado;
+}
+
+float temperatura(float celsius)
+{
+float fahrenhit = celsius * 9/5 + 32;
+return fahrenhit;
+}
+
+float milimetrosParaPolegadas(float milimetros)
+{
+  return milimetros /25.4;
+}
+
+float polegadasParaCentimetros(float polegadas)
+{
+  return polegadas *2.54;
+}
+
+float tamanhoDaTv(float polegadas, float alturaCm)
+{
+  return sqrt(sq(polegadasParaCentimetros(polegadas))- sq(alturaCm));
+}
