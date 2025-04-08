@@ -1,0 +1,112 @@
+//!FEITO ATE O SEGUNDO INDO PARA O TERCEIRO
+//*INCLUIDES
+#include <Arduino.h>
+#include <liquidCrystal_I2C.h>
+#include <Bounce2.h>
+
+//*BIBLIOTECA
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+
+//*DEFINICOES DO LED
+#define pinLed1 15
+#define pinLed2 2
+#define pinLed3 4
+#define pinLed4 5
+
+//*DEFINECOES DO BOTAO
+#define pinBotao1 18
+#define pinBotao2 19
+#define pinBotao3 23
+
+//*FUNCOES
+
+//*INSTANCIAS
+Bounce botao1 = Bounce();
+Bounce botao2 = Bounce();
+Bounce botao3 = Bounce();
+
+//*VARIAVEIS GLOBAIS
+bool posicao = 0;
+int contagem = 0;
+bool modoSelecao = 0;
+
+void setup()
+{
+  lcd.init();
+  lcd.backlight();
+
+  pinMode(15, OUTPUT);
+  pinMode(2, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+
+  botao1.attach(18, INPUT_PULLUP);
+  botao2.attach(19, INPUT_PULLUP);
+  botao3.attach(23, INPUT_PULLUP);
+
+  lcd.print(">Led 1 Off");
+  lcd.setCursor(0, 0);
+  lcd.print("Led 2 Off");
+  lcd.setCursor(0, 1);
+  lcd.print("Led 3 Off");
+  lcd.setCursor(0, 2);
+  lcd.print("Led 4 Off");
+  lcd.setCursor(0, 3);
+}
+
+void loop()
+{
+  botao1.update();
+  botao2.update();
+  botao3.update();
+
+static int contagem = 0;
+static bool modoSelecao = 0;
+
+
+  if (botao1.fell())
+  {
+    if (modoSelecao == 1)
+    {
+      contagem++;
+      if (contagem == 4)
+      {
+        contagem = 0;
+      }
+      Serial.println(contagem);
+    }
+  }
+  if (botao2.fell())
+  {
+    contagem--;
+    if (contagem == -1)
+    {
+      contagem = 3;
+    }
+    Serial.println(contagem);
+  }
+  if (botao3.fell())
+  {
+    modoSelecao = !modoSelecao;
+    Serial.println(modoSelecao);
+  }
+
+if(estadoAnterior && estadoAtual)
+
+
+
+
+
+}
+
+// if(botao3.fell())//SE O BOTAO3 FOR PRESSIONADO
+// }
+// if(botao1.fell()) //SE O BOTAO1 FOR PRESSIONADO
+//{
+// }
+
+// if(botao2.fell())//SE O BOTAO2 FOR PRESSIONADO
+//{
+// }
+
+// if(botao3.fell())//SE O BOTAO3 FOR PRESSIONADO
