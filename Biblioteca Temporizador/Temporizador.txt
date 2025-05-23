@@ -1,0 +1,111 @@
+#include "Temporizador.h"
+
+/**
+ * @brief
+ * @param
+ */
+Temporizador::Temporizador(unsigned long tempo_ms) {}
+
+/**
+ * @brief Inicia o Temporizador
+ */
+void Temporizador::iniciar()
+{
+    unsigned long tempoAtual = millis();
+    unsigned long tempoInicial = 0;
+}
+
+void Temporizador::parar()
+{
+      if (temporizadorAtivo)
+    {
+        if (millis() - tempoInicial >= tempoIntervalo)
+        {
+            // Ação quando o tempo é atingido
+            temporizadorAtivo = false; // "Para" o temporizador
+        }
+    }
+}
+
+/**
+ * @brief Altera o intervalo
+ */
+void Temporizador::definirIntervalo(unsigned long tempo_ms)
+{
+ if(!tempoInicial <= tempoIntervalo)
+ {
+    intervalo = tempo_ms;
+ }
+}
+
+void Temporizador::reiniciar()
+{
+ tempoInicial = millis();
+}
+
+bool Temporizador::estaAtivo()
+{
+    if (!ativo) return false;
+    return (millis() - tempoInicial >= intervalo);
+}
+
+bool Temporizador::estaPronto()
+{
+  return ativo;
+}
+
+///FIM DO TEMPORIZADOR.CPP
+
+
+#ifndef TEMPORIZADOR_H
+#define TEMPORIZADOR_H
+
+#include <Arduino.h>
+
+class Temporizador
+{
+private:
+void begin();
+Temporizador(unsigned long tempo_ms = 1000);
+
+unsigned long tempoAtual = millis();
+unsigned long tempoInicial = 0;
+unsigned long tempoIntervalo = 50;
+
+bool temporizadorAtivo = false;
+unsigned long intervalo;
+
+bool ativo = false;
+
+public:
+void iniciar();
+void parar();
+void definirIntervalo(unsigned long tempo_ms);
+void reiniciar();
+
+
+bool estaAtivo();
+bool estaPronto();
+};
+
+#endif
+
+
+//FIM DO TEMPORIZADOR.H
+
+
+
+#include <Arduino.h>
+#include "Temporizador.cpp"
+
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop()
+{
+
+}
+
+//MAIN.CPP
