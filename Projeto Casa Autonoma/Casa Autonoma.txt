@@ -1,0 +1,157 @@
+#include <Arduino.h>
+#include <ArduinoJson.h>
+#include <PubSubClient.h>
+#include <WiFiClientSecure.h>
+#include <Adafruit_NeoPixel.h>
+#include "internet.h"
+#include "certificados.h"
+
+#define botao 0
+#define NUM_LEDS 2
+
+int modoAtual = 0;
+const int totalModos = 4;
+bool ledLigado = false;
+bool estadoAtualBotao = false;
+bool estadoAnteriorBotao = false;
+const int mqtt_port = 8883;
+const char *mqtt_id = "maria";
+const char *mqtt_SUB = "senai134/mesa07/monitor";
+const char *mqtt_PUB = "senai134/mesa07/";
+bool estadoledRGB = 0;
+
+//*INSTANCIAS
+WiFiClientSecure espClient;
+PubSubClient mqtt(espClient);
+Adafruit_NeoPixel ledRGB(1, 48, NEO_GRB);//*parametros: primeiro nome do led - quantidade de led - qual o pino - o tipo do led 
+JsonDocument doc;
+
+//*PROTOTIPOS
+void Callback(char *topic, byte *payload, unsigned int length);
+void conectaMQTT();
+void publicaEstadoLed(const String &estado);
+void atualizaLCD(const String &estado);
+
+void setup()
+{
+  Serial.begin(9600);
+  ledRGB.begin();
+                
+  ledRGB.setBrightness(53); //*Intessidade do led / vai de 0 a 225
+
+  conectaWiFi();
+
+  espClient.setCACert(AWS_ROOT_CA);
+  espClient.setCertificate(AWS_CERT);
+  espClient.setPrivateKey(AWS_KEY);
+
+  mqtt.setServer(AWS_BROKER, mqtt_port);
+  mqtt.setCallback(Callback);
+
+}
+
+void loop()
+{
+  checkWiFi();
+
+  if (!mqtt.connected())
+  {
+    conectaMQTT();
+  }
+
+  mqtt.loop();
+
+  static unsigned long tempo_pub = 0;
+  unsigned long agora = millis();
+
+  if (agora - tempo_pub > 6000)
+  {
+    JsonDocument doc;
+    doc["msg"] = "Maria";
+
+    String mensagem;
+    serializeJson(doc, mensagem);
+    mqtt.publish(mqtt_PUB, mensagem.c_str());
+    tempo_pub = agora;
+  }
+
+ bool estadoAtualBotao = !digitalRead(botao); // Invertido por INPUT_PULLUP
+
+  if (estadoAtualBotao && !estadoAnteriorBotao) {
+    modoAtual = (modoAtual + 1) % totalModos;
+
+    uint32_t cor;
+
+    switch (modoAtual) {
+      case 1: cor = ledRGB.Color(0, 255, 0); break;   // Verde
+      case 0: cor = ledRGB.Color(255, 0, 0); break;   // Vermelho
+      case 3: cor = ledRGB.Color(0, 0, 0); break;     // Desligado
+    }
+
+    for (int i = 0; i < NUM_LEDS; i++) {
+      ledRGB.setPixelColor(i, cor);
+    }
+
+    ledRGB.show();
+  }
+
+
+  estadoAnteriorBotao = estadoAtualBotao;
+}
+
+
+
+void Callback(char *topic, byte *payload, unsigned int length)
+{
+  String msg((char *)payload, length);
+  Serial.printf("Mensagem recebida (topico: [%s]): %s \n\r", topic, msg.c_str());
+
+  JsonDocument doc;
+  DeserializationError erro = deserializeJson(doc, msg);
+
+  if (erro) {
+    Serial.println("Erro ao fazer parse do JSON");
+    return;
+  }
+
+  if (doc.containsKey("led")) {
+    String cor = doc["led"];
+
+    if (cor == "vermelho") {
+      for (int i = 0; i < NUM_LEDS; i++) ledRGB.setPixelColor(i, ledRGB.Color(255, 0, 0));
+    } else if (cor == "verde") {
+      for (int i = 0; i < NUM_LEDS; i++) ledRGB.setPixelColor(i, ledRGB.Color(0, 0, 255));
+    } else if (cor == "desligado") {
+      for (int i = 0; i < NUM_LEDS; i++) ledRGB.setPixelColor(i, 0);
+    }
+
+    ledRGB.show();
+    Serial.println("Cor do LED alterada via app!");
+  
+  JsonDocument resposta;
+resposta["status"] = "ok";
+resposta["led"] = cor;
+String respostaStr;
+serializeJson(resposta, respostaStr);
+mqtt.publish(mqtt_PUB, respostaStr.c_str());
+  }
+}
+
+
+void conectaMQTT()
+{
+  while (!mqtt.connected())
+  {
+    Serial.print("Conectando ao AWS IoT Core...");
+    if (mqtt.connect(mqtt_id))
+    {
+      Serial.print("Conectado!");
+      mqtt.subscribe(mqtt_SUB);
+    }
+    else
+    {
+      Serial.printf("falhou (%d). Tentando novamente em 5s \n\r", mqtt.state());
+      delay(5000);
+    }
+  }
+}
